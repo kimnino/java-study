@@ -81,9 +81,71 @@ public class ComparatorTest {
 
 
     @Test
-    void test_comparingThen() {
+    void test_nullsFirst_nullsLast() {
+        List<String> names = Arrays.asList("래쉬포드", null, "마샬", "산체스", null);
 
+        // null을 먼저 오게 정렬하고, 그 외는 알파벳 순으로 정렬
+        names.sort(Comparator.nullsFirst(Comparator.naturalOrder()));
+        System.out.println(names);
+
+        // null을 마지막에 오게 정렬하고
+        names.sort(Comparator.nullsLast(Comparator.naturalOrder()));
+        System.out.println(names);
     }
 
+    @Test
+    void test_thenComparing() {
+        List<Person> persons = Arrays.asList(
+                Person.builder().age(20).name("김민혁").build(),
+                Person.builder().age(26).name("아마드").build(),
+                Person.builder().age(24).name("브루노").build(),
+                Person.builder().age(33).name("요로").build(),
+                Person.builder().age(30).name("마이누").build(),
+                Person.builder().age(34).name("김민혁").build(),
+                Person.builder().age(34).name("김민혁").build());
 
+        persons.sort(
+                Comparator.comparing(Person::getName)
+                        .thenComparing(Person::getAge));
+        System.out.println(persons);
+
+        persons.sort(
+                Comparator.comparing(Person::getName)
+                        .reversed()
+                        .thenComparing(Person::getAge));
+        System.out.println(persons);
+
+        persons.sort(
+                Comparator.comparing(Person::getName)
+                        .thenComparing(Person::getAge)
+                        .reversed());
+        System.out.println(persons);
+
+        persons.sort(
+                Comparator.comparing(Person::getName)
+                        .reversed()
+                        .thenComparing(Person::getAge)
+                        .reversed());
+        System.out.println(persons);
+
+        persons.sort(
+                Comparator.comparing(Person::getName)
+                        .thenComparing(Person::getAge, Comparator.reverseOrder()));
+        System.out.println(persons);
+    }
+
+    @Test
+    void test_thenComparingInt() {
+        List<Person> persons = Arrays.asList(
+                Person.builder().age(20).name("김민혁").build(),
+                Person.builder().age(26).name("아마드").build(),
+                Person.builder().age(24).name("브루노").build(),
+                Person.builder().age(33).name("요로").build(),
+                Person.builder().age(30).name("마이누").build(),
+                Person.builder().age(34).name("김민혁").build(),
+                Person.builder().age(34).name("김민혁").build());
+
+        persons.sort(Comparator.comparingInt(Person::getAge));
+        System.out.println(persons);
+    }
 }
