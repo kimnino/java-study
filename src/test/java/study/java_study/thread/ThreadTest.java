@@ -34,4 +34,25 @@ public class ThreadTest {
             }
         }
     }
+
+
+    @Test
+    public void test3() throws InterruptedException {
+        ThreadLifecycle threadLifecycle = new ThreadLifecycle();
+        threadLifecycle.exec();
+    }
+
+    @Test
+    public void test4() {
+        ThreadAPI threadAPI = new ThreadAPI();
+
+        threadAPI.currentThread();
+    }
+
+    @Test
+    public void test5() throws InterruptedException {
+        ThreadAPI threadAPI = new ThreadAPI();
+
+        threadAPI.isAlive();
+    }
 }
