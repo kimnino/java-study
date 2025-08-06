@@ -32,7 +32,7 @@ public class FutureCancelExample {
         public String call() {
             try {
                 System.out.println("작업시작");
-                Thread.sleep(8000);
+                Thread.sleep(20000);
                 System.out.println("작업완료");
                 return "작업 완료";
             } catch (InterruptedException e) {
@@ -41,5 +41,4 @@ public class FutureCancelExample {
             }
         }
     }
-
 }
